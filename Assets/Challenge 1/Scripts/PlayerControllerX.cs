@@ -13,11 +13,11 @@ public class PlayerControllerX : MonoBehaviour
 
     }
     
-    void FixedUpdate()
+    void Update()
     {
-        verticalInput = Input.GetAxis("Vertical");
+        verticalInput = Input.GetAxis("Vertical1");
         
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
-        transform.Rotate(Vector3.right * verticalInput);
+        transform.Rotate(Vector3.right * verticalInput * Time.deltaTime * rotationSpeed);
     }
 }
