@@ -6,27 +6,34 @@ public class SpawnManagerX4 : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public GameObject powerupPrefab;
-
     private float spawnRangeX = 10;
     private float spawnZMin = 15; // set min spawn Z
     private float spawnZMax = 25; // set max spawn Z
-
     public int enemyCount;
     public int waveCount = 1;
+    public GameObject player;
+    private float enemySpeed = 100f;
+    private float EnemyCountSpeed = 20f;
+    
 
-
-    public GameObject player; 
-
-    // Update is called once per frame
+    void Start()
+    {
+        SpawnEnemyWave(waveCount);
+        Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
+    }
+    
     void Update()
     {
-        enemyCount = GameObject.FindGameObjectsWithTag("Powerup").Length;
-
+        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        // enemyCount = FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length; // DANGER!!! R.I.P DESKTOP COMPUTER!!!!
+        
         if (enemyCount == 0)
         {
+            waveCount++;
+            enemySpeed += EnemyCountSpeed;
+            
             SpawnEnemyWave(waveCount);
         }
-
     }
 
     // Generate random spawn position for powerups and enemy balls
@@ -49,14 +56,14 @@ public class SpawnManagerX4 : MonoBehaviour
         }
 
         // Spawn number of enemy balls based on wave number
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < enemiesToSpawn; i++)
         {
-            Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
+            GameObject enemy = Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
+
+            enemy.GetComponent<EnemyX4>().speed = enemySpeed;
         }
-
-        waveCount++;
+        
         ResetPlayerPosition(); // put player back at start
-
     }
 
     // Move player back to position in front of own goal
@@ -65,7 +72,5 @@ public class SpawnManagerX4 : MonoBehaviour
         player.transform.position = new Vector3(0, 1, -7);
         player.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-
     }
-
 }
