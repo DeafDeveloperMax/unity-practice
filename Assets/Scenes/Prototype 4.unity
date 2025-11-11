@@ -229,8 +229,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b9cff6184eafd4c8b341dccfbc3064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager_4
-  enemyPrefab: {fileID: 8253370607747426483, guid: 46700c3748b22ad4da3efecf7a9e4bc6, type: 3}
-  powerupPrefab: {fileID: 783693170275664697, guid: d292ba8409dbc78468ea831a12287c9c, type: 3}
+  enemyPrefabs:
+  - {fileID: 8253370607747426483, guid: 46700c3748b22ad4da3efecf7a9e4bc6, type: 3}
+  - {fileID: 8253370607747426483, guid: 82862090eb838a14ca8b21980892b13e, type: 3}
+  powerupPrefabs:
+  - {fileID: 783693170275664697, guid: d292ba8409dbc78468ea831a12287c9c, type: 3}
+  - {fileID: 783693170275664697, guid: db47fe915f65c7642836caa661e6beec, type: 3}
   enemyCount: 0
   waveNumber: 1
 --- !u!4 &738036091
@@ -717,7 +721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d048e67e346ab41b26281e47d6defb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RotateCamera
-  speed: 55
+  speed: 80
 --- !u!4 &1470531844
 Transform:
   m_ObjectHideFlags: 0
@@ -833,7 +837,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 764b0692c55c24d41af42910abf1f91e, type: 2}
+  - {fileID: 2100000, guid: 4c97b24d72ebade4d98acaf3b75c90ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -894,6 +898,8 @@ MonoBehaviour:
   speed: 5
   hasPowerup: 0
   powerupIndicator: {fileID: 1730819301}
+  currentPowerUp: 0
+  rocketPrefab: {fileID: 3000411837351889691, guid: 60ff2f94f8797eb4db1acfd2d0ea5187, type: 3}
 --- !u!1001 &7305732181041295649
 PrefabInstance:
   m_ObjectHideFlags: 0
