@@ -153,3 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   speed: 3
+  isBoss: 0
+  spawnInterval: 0
+  miniEnemySpawnCount: 0
