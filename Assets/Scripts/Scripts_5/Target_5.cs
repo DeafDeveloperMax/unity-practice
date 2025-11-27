@@ -8,7 +8,7 @@ public class Target_5 : MonoBehaviour
     private GameManager_5 gameManager;
     private float minSpeed = 12;
     private float maxSpeed = 16;
-    private float maxTorque = 10;
+    private float maxTorque = 3;
     private float xRange = 4;
     private float ySpawnPos = -2;
     public int pointValue;
