@@ -9,6 +9,10 @@ TagManager:
   - Ground
   - Powerup
   - Enemy
+  - Money
+  - Bomb
+  - Dog
+  - Bad
   layers:
   - Default
   - TransparentFX
