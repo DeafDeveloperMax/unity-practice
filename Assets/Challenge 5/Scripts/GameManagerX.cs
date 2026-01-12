@@ -11,11 +11,13 @@ public class GameManagerX : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI timeLeftText;
     public GameObject titleScreen;
     public Button restartButton; 
 
     public List<GameObject> targetPrefabs;
 
+    public float time = 60.0f;
     private int score;
     private float spawnRate = 1.5f;
     public bool isGameActive;
@@ -29,6 +31,7 @@ public class GameManagerX : MonoBehaviour
     {
         spawnRate /= difficulty;
         isGameActive = true;
+        time = 60.0f;
         StartCoroutine(SpawnTarget());
         score = 0;
         UpdateScore(0);
@@ -73,6 +76,25 @@ public class GameManagerX : MonoBehaviour
     {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;
+    }
+
+    private void Update()
+    {
+        if (isGameActive)
+        {
+            UpdateTimeLeft();
+        }
+    }
+
+    private void UpdateTimeLeft()
+    {
+        time -= Time.deltaTime;
+        timeLeftText.text = "TimeLeft: " + Mathf.Round(time);
+        if (time <= 0)
+        {
+            time = 0;
+            GameOver();
+        }
     }
 
     // Stop game, bring up game over text and restart button
