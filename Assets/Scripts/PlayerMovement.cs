@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 20f;
-    public float turnSpeed = 60f;
+    [SerializeField] private float speed = 20f; 
+    private const float turnSpeed = 60f;
     
     public Camera mainCamera;
     public Camera hoodCamera;
@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
         
     }
     
-    void Update () {
+    void FixedUpdate () {
         float moveInput = Input.GetAxis("Vertical" + inputID); 
         float turnInput = Input.GetAxis("Horizontal" + inputID); 
 
