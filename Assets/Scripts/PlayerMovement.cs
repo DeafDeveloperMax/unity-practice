@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
         
     }
     
-    void FixedUpdate () {
+    void Update () {
         float moveInput = Input.GetAxis("Vertical" + inputID); 
         float turnInput = Input.GetAxis("Horizontal" + inputID); 
 
