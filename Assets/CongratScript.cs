@@ -1,50 +1,69 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CongratScript : MonoBehaviour
 {
-    public TextMesh Text;
-    public ParticleSystem SparksParticles;
+    [SerializeField] private TextMesh text;
+    [SerializeField] private ParticleSystem sparksParticles;
     
-    private List<string> TextToDisplay;
-    
-    private float RotatingSpeed;
-    private float TimeToNextText;
+    [SerializeField] private float textSwitchInterval = 1.5f;
+    [SerializeField] private float rotatingSpeed = 1.0f;
 
-    private int CurrentText;
-    
-    // Start is called before the first frame update
-    void Start()
+    private List<string> textToDisplay = new List<string>();
+    private float timeToNextText;
+    private int currentTextIndex;
+
+    private void Start()
     {
-        TimeToNextText = 0.0f;
-        CurrentText = 0
-        
-        RotatingSpeed = 1.0;
-
-        TextToDisplay.Add("Congratulation");
-        TextToDisplay.Add("All Errors Fixed");
-
-        Text.text = TextToDisplay[0];
-        
-        SparksParticles.Play();
+        InitializeTexts();
+        DisplayCurrentText();
+        PlayParticles();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        TimeToNextText += Time.deltaTime;
+        UpdateTextDisplay();
+    }
 
-        if (TimeToNextText > 1.5f)
+    private void InitializeTexts()
+    {
+        textToDisplay.Add("Congratulations");
+        textToDisplay.Add("All Errors Fixed");
+        
+        timeToNextText = 0f;
+        currentTextIndex = 0;
+    }
+
+    private void UpdateTextDisplay()
+    {
+        timeToNextText += Time.deltaTime;
+
+        if (timeToNextText >= textSwitchInterval)
         {
-            TimeToNextText = 0.0f;
-            
-            CurrentText++;
-            if (CurrentText >= TextToDisplay.Count)
-            {
-                CurrentText = 0;
+            timeToNextText = 0f;
+            SwitchToNextText();
+        }
+    }
 
+    private void SwitchToNextText()
+    {
+        currentTextIndex = (currentTextIndex + 1) % textToDisplay.Count;
+        DisplayCurrentText();
+    }
 
-            Text.text = TextToDisplay[CurrentText];
+    private void DisplayCurrentText()
+    {
+        if (text != null && textToDisplay.Count > 0)
+        {
+            text.text = textToDisplay[currentTextIndex];
+        }
+    }
+
+    private void PlayParticles()
+    {
+        if (sparksParticles != null)
+        {
+            sparksParticles.Play();
         }
     }
 }
